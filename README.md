@@ -3,6 +3,7 @@
 
 demo链接:http://xiaotianxia.github.io/popWin.js
 
+#使用
 ```js
 popWin({
             "title":"温馨提示",//<span class="comment">标题</span>
