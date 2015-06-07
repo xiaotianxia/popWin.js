@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>test</title>
+    <link rel="stylesheet" href="popWin.css" />
+    <script src="popWin.js"></script>
+    <script src="jsonpTest.js"></script>
+    <script src="Drag.js"></script>
+</head>
+<style>
+a{
+    text-decoration: none;
+}  
+ul.menu{
+    position: fixed;
+    left: 10px;
+    top:100px;
+    width: 150px;
+    border:1px solid #aaa;
+}   
+ul li{
+    border-bottom: 1px dotted #aaa;
+    padding: 10px;
+    background-color: #A5Da99;
+    text-align: center;
+}
+ul li:hover{
+    background-color: #A5Da33;
+}
+ul li a{
+    display: inline-block;
+    width: 110px;
+}
+button,div.construction p{
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    color:#fff;
+    font-size: 20px;
+    line-height: 10px;
+    border:none;
+    outline: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    display: inline-block;
+    background-color:#A5Da86;
+}
+div.demo{
+    width:800px;
+    margin:10px auto;
+    overflow: auto;
+    word-wrap: break-word;
+    border:1px dashed #aaa;
+}
+pre{
+    color:#666;
+}
+div.construction p{
+    width: 50px;
+    height: 18px;
+    line-height: 18px;
+    cursor: text;
+    background-color:#DD6B55;
+}
+span.comment{
+    color:green;
+}
+</style>
+<body>
+    <ul class="menu">
+        <li><a href="#construction">说明</a></li>
+        <li><a href="#demo1">demo1</a></li>
+        <li><a href="#demo2">demo2</a></li>
+        <li><a href="#demo3">demo3</a></li>
+        <li><a href="#demo4">demo4</a></li>
+        <li><a href="#demo5">demo5</a></li>
+        <li><a href="#demo6">demo6</a></li>
+        <li><a href="#demo7">demo7</a></li>
+    </ul>
+    <div id="construction" class=" demo construction">
+        <p>说明:</p>
+        <pre>
+           popWin({
+            "title":"温馨提示",//<span class="comment">标题</span>
+            "infoType":"",//<span class="comment">提示的类型:warning/error/success/question</span>
+            "bAllowDrag":true,//<span class="comment">是否允许拖拽</span>
+            "content":"这是提示内容。",//<span class="comment">提示的主内容</span>
+            "bIsConfirmBtn":true,//<span class="comment">是否有“取消”按钮</span>
+            "bAllowOutsideClick":false,//<span class="comment">是否点击外面关闭</span>
+            "bAllowEscClose":true,//<span class="comment">是否Esc关闭</span>
+            "confirmCallback":function(){console.log("====确定了====");},//<span class="comment">确定后回调函数</span>
+            "cancelCallback":function(){ console.log("====取消了====");},//<span class="comment">取消后回调函数</span>
+            "jsonp":true,//<span class="comment">是否使用jsonp</span>
+            "url":"jsonpDataLoad.js"//<span class="comment">jsonp远程url</span>
+        }); 
+        </pre>
+    </div>
+    <div id="demo1" class="demo">
+        <button id="btn1">demo1</button><span class="comment">question</span>
+        <pre>
+           popWin({
+            "title":"哈哈哈哈",
+            "infoType":"question",
+            "content":"确定吗？确定吗确定吗？确定吗确定吗？确定吗确定吗？确定吗确定吗？确定吗？？"
+        }); 
+        </pre>
+    </div>
+    <div id="demo2" class="demo">
+        <button id="btn2">demo2</button><span class="comment">warning,没有确定按钮</span>
+        <pre>
+           popWin({
+            "title":"嘿嘿嘿嘿",
+            "infoType":"warning",
+            "content":"小心操作！！",
+            "bIsConfirmBtn":false,
+            "bAllowOutsideClick":true
+        });
+        </pre>
+    </div>
+    <div id="demo3" class="demo">
+        <button id="btn3">demo3</button><span class="comment">success，不能Esc关闭</span>
+        <pre>
+          popWin({
+            "infoType":"success",
+            "bIsConfirmBtn":true,
+            "bAllowEscClose":false
+        });
+        </pre>
+    </div>
+    <div id="demo4" class="demo">
+        <button id="btn4">demo4</button><span class="comment">error，不能拖拽，点击外部不能关闭,取消后调</span>
+        <pre>
+           popWin({
+            "infoType":"error",
+            "content":"没有拖拽",
+            "bAllowDrag":false,
+            "bIsConfirmBtn":false,
+            "bAllowOutsideClick":false,
+            "cancelCallback":function(){
+                alert(this.content);
+            }
+        });
+        </pre>
+    </div>
+    <div id="demo5" class="demo">
+        <button id="btn5">demo5</button><span class="comment">无参数</span>
+        <pre>
+           popWin();
+        </pre>
+    </div>
+    <div id="demo6" class="demo">
+        <button id="btn6">demo6</button><span class="comment">用户输入表单</span>
+        <pre>
+           popWin({
+            "infoType":"",
+            "userInput":[
+                {
+                    title:"姓名",
+                    tip:"请输入姓名。"
+                },
+                {
+                    title:"性别",
+                    tip:"请输入性别。"
+                },
+                {
+                    title:"地址",
+                    tip:"请输入地址。"
+                }
+            ],
+            "content":"没有拖拽",
+            "bAllowDrag":false,
+            "bIsConfirmBtn":false,
+            "bAllowOutsideClick":false,
+            "confirmCallback":function(){           
+                var name=document.getElementById("t0").value;
+                var sex=document.getElementById("t1").value;
+                var address=document.getElementById("t2").value;
+                alert("请核实您填入的信息\n姓名:"+name+"\n性别:"+sex+"\n地址:"+address);
+            }
+           });
+        </pre>
+    </div>
+    <div id="demo7" class="demo">
+        <button id="btn7">demo7</button><span class="comment">jsonp</span>
+        <pre>
+           popWin({
+            "infoType":"",
+            "content":"",
+            "bAllowDrag":true,
+            "bIsConfirmBtn":true,
+            "bAllowOutsideClick":true,
+            "jsonp":true,
+            "url":"dataLoad.js"
+        });
+        </pre>
+    </div>
+<script>
+    document.getElementById("btn1").onclick=function(){
+        popWin({
+            "title":"哈哈哈哈",
+            "infoType":"question",
+            "content":"确定吗？确定吗确定吗？确定吗确定吗？确定吗确定吗？确定吗？？"
+        });
+    }
+    document.getElementById("btn2").onclick=function(){
+        popWin({
+            "title":"嘿嘿嘿嘿",
+            "infoType":"warning",
+            "content":"小心操作！！",
+            "bIsConfirmBtn":false,
+            "bAllowOutsideClick":true
+        });
+    }
+    document.getElementById("btn3").onclick=function(){
+        popWin({
+            "infoType":"success",
+            "bIsConfirmBtn":true,
+            "bAllowEscClose":false
+        });
+    }
+    document.getElementById("btn4").onclick=function(){
+        popWin({
+            "infoType":"error",
+            "content":"没有拖拽",
+            "bAllowDrag":false,
+            "bIsConfirmBtn":false,
+            "bAllowOutsideClick":false,
+            "cancelCallback":function(){
+                alert(this.content);
+            }
+        });
+    }
+    document.getElementById("btn5").onclick=function(){
+        popWin();
+    }
+    document.getElementById("btn6").onclick=function(){
+        popWin({
+            "infoType":"",
+            "userInput":[
+                {
+                    title:"姓名",
+                    tip:"请输入姓名。"
+                },
+                {
+                    title:"性别",
+                    tip:"请输入性别。"
+                },
+                {
+                    title:"地址",
+                    tip:"请输入地址。"
+                }
+            ],
+            "content":"没有拖拽",
+            "bAllowDrag":false,
+            "bAllowOutsideClick":false,
+            "bAllowDrag":false,
+            "bAllowOutsideClick":false,
+            "confirmCallback":function(){           
+                var name=document.getElementById("t0").value;
+                var sex=document.getElementById("t1").value;
+                var address=document.getElementById("t2").value;
+                alert("请核实您填入的信息\n姓名:"+name+"\n性别:"+sex+"\n地址:"+address);
+            }
+        });
+    }
+    document.getElementById("btn7").onclick=function(){
+        popWin({
+            "infoType":"",
+            "content":"",
+            "bAllowDrag":true,
+            "bIsConfirmBtn":true,
+            "bAllowOutsideClick":true,
+            "jsonp":true,
+            "url":"jsonpDataLoad.js"
+        });
+    }
+</script>
+</body>
+
+</html>
