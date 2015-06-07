@@ -13,8 +13,8 @@ popWin({
             "bIsConfirmBtn":true,//是否有“取消”按钮
             "bAllowOutsideClick":false,//是否点击外面关闭
             "bAllowEscClose":true,//是否Esc关闭
-            "confirmCallback":function(){console.log("====确定了====");},
-            "cancelCallback":function(){ console.log("====取消了====");},
+            "confirmCallback":function(){console.log("====确定了====");},//确定后回调函数
+            "cancelCallback":function(){ console.log("====取消了====");},//取消后回调函数
             "jsonp":true,//是否使用jsonp
             "url":"jsonpDataLoad.js"//jsonp远程url
         });
